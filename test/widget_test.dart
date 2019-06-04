@@ -5,14 +5,11 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_app_1/main.dart';
 import 'package:bloc/bloc.dart';
 
 enum UserEvent { Click, Tap }
-
 
 Stream<int> createStream() async* {
   for (int i = 0; i < 10; i++) {
@@ -28,7 +25,7 @@ Future<int> operateStream(Stream<int> stream) async {
   return sum;
 }
 
-Future main() async {
+void main() {
 //  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
 //    // Build our app and trigger a frame.
 //    await tester.pumpWidget(MyApp());
@@ -62,65 +59,65 @@ Future main() async {
 //
 //  Stream.fromFuture(operateStream(quickStream));
 
-    BlocSupervisor.delegate = SimpleBlocDelegate();
+//    BlocSupervisor.delegate = SimpleBlocDelegate();
+//
+//    CounterBloc counterBloc = CounterBloc();
+//    counterBloc.dispatch(UserEvent.Tap);
+//    counterBloc.dispatch(UserEvent.Click);
 
-    CounterBloc counterBloc = CounterBloc();
-    counterBloc.dispatch(UserEvent.Tap);
-    counterBloc.dispatch(UserEvent.Click);
+  List<int> list = [1, 2, 3, 4, 5, 6];
+  Stream<int> quickStream = Stream.fromIterable(list);
+  quickStream.listen((event) {
+    print(event);
+  }, onDone: () {
+    print("done");
+  }, onError: (dd) {
+    print("onError");
+  }, cancelOnError: false).asFuture().then((event) {
+    print("event_$event");
+  }, onError: (e) {
+    print("onError$e");
+  });
+
+
+
 }
-
-
-
 
 class CounterBloc extends Bloc<UserEvent, int> {
   @override
   int get initialState => 0;
 
-  @override
-  Stream<int> mapEventToState(UserEvent event) async* {
-    switch (event) {
-      case UserEvent.Click:
-        yield initialState + 1;
-        break;
-      case UserEvent.Tap:
-        yield initialState - 1;
-        break;
-    }
-  }
+//  @override
+//  Stream<int> mapEventToState(UserEvent event) async* {
+//    switch (event) {
+//      case UserEvent.Click:
+//        yield initialState + 1;
+//        break;
+//      case UserEvent.Tap:
+//        yield initialState - 1;
+//        break;
+//    }
+//  }
+
+
+  // @override
+  // void onError(Object error, StackTrace stacktrace) {}
 
   @override
-  void onTransition(Transition<UserEvent, int> transition) {
-    print(transition.event.toString() + " " + transition.currentState.toString());
-  }
+  void dispose() {}
 
   @override
-  void onError(Object error, StackTrace stacktrace) {
-
+  Stream<int> mapEventToState(int state, UserEvent event) {
+    // implement mapEventToState
+    return null;
   }
-
-  @override
-  void dispose() {
-
-  }
-
-
 }
 
-class SimpleBlocDelegate extends BlocDelegate {
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
-
-}
-
-
+//class SimpleBlocDelegate extends BlocDelegate {
+//
+//  @override
+//  void onEvent(Bloc bloc, Object event) {
+//    super.onEvent(bloc, event);
+//    print(event);
+//  }
+//}
