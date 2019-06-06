@@ -1,12 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-
 class Post extends Equatable {
-
   final int id;
   final String title;
   final String body;
-
 
 //  Post(this.id, this.title, this.content);
 
@@ -18,15 +15,15 @@ class Post extends Equatable {
   }
 }
 
-
-//void main() {
-//  List<int> list = [1, 2, 3, 4, 5, 6];
-//  Stream<int> quickStream = Stream.fromIterable(list);
-//  quickStream.lastWhere((i) {
-//    return i < 4;
-//  }).then((i) {
-//    print(i);
-//  });
+// void main() {
+//   List<int> list = [1, 2, 3, 4, 5, 6];
+//   Stream<int> quickStream = Stream.fromIterable(list);
+//   quickStream.lastWhere((i) {
+//     return i < 4;
+//   }).then((i) {
+//     print(i);
+//   });
+// }
 //
 //
 //
@@ -40,4 +37,4 @@ class Post extends Equatable {
 ////  }, onError: (dd) {
 ////    print("onError");
 ////  }, cancelOnError: false);
-//}
+// }

@@ -3,11 +3,73 @@ import 'package:flutter_app_1/demo/infiniteListDemo/Post.dart';
 import 'package:flutter_app_1/demo/infiniteListDemo/PostBloc.dart';
 import 'package:flutter_app_1/demo/infiniteListDemo/PostEvent.dart';
 import 'package:flutter_app_1/demo/infiniteListDemo/PostState.dart';
+import 'package:flutter_app_1/demo/weather/repositories/Weather_api_client.dart';
+import 'package:flutter_app_1/demo/weather/repositories/repositores.dart';
+import 'package:flutter_app_1/pages/weather_page.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 
-void main() => runApp(MyApp());
+
+
+
+// void main() => runApp(WeatherPage());
+
+
+void main() {
+  BlocSupervisor.delegate = MyBlocDelegate();
+
+  final WeatherRepository weatherRepository = WeatherRepository(
+    weatherApiClient: WeatherApiClient(
+      httpClient: http.Client(),
+    )
+  );
+
+
+  runApp(WeatherPage(weatherRepository: weatherRepository));
+}
+
+
+class MyBlocDelegate extends BlocDelegate {
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    super.onEvent(bloc, event);
+    print(event);
+  }
+
+  @override
+  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+    super.onError(bloc, error, stacktrace);
+    print(error);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class MyApp extends StatelessWidget {
   @override
