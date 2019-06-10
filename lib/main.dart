@@ -6,6 +6,7 @@ import 'package:flutter_app_1/demo/infiniteListDemo/PostState.dart';
 import 'package:flutter_app_1/demo/weather/repositories/Weather_api_client.dart';
 import 'package:flutter_app_1/demo/weather/repositories/repositores.dart';
 import 'package:flutter_app_1/pages/weather_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';

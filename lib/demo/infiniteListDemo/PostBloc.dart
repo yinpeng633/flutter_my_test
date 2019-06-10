@@ -17,7 +17,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   PostState get initialState => PostUninitialized();
 
   @override
-  Stream<PostState> mapEventToState(PostState currentState, PostEvent event) async* {
+  Stream<PostState> mapEventToState(PostEvent event) async* {
     if (event is Fetch && !_hasReachedMax(currentState)) {
       try {
         // 当最开始时
@@ -31,11 +31,11 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         // 翻页时
         if (currentState is PostLoaded) {
           final posts =
-              await _fetchPosts(currentState.posts.length, 20);
+              await _fetchPosts((currentState as PostLoaded).posts.length, 20);
           yield posts.isEmpty
-              ? currentState.copyWith(hasReachedMax: true)
+              ? (currentState as PostLoaded).copyWith(hasReachedMax: true)
               : PostLoaded(
-                  posts: currentState.posts + posts,
+                  posts: (currentState as PostLoaded).posts + posts,
                   hasReachedMax: false,
                 );
         }

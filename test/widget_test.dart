@@ -107,7 +107,7 @@ class CounterBloc extends Bloc<UserEvent, int> {
   void dispose() {}
 
   @override
-  Stream<int> mapEventToState(int state, UserEvent event) {
+  Stream<int> mapEventToState(UserEvent event) {
     // implement mapEventToState
     return null;
   }
